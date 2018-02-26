@@ -20,7 +20,7 @@
 IJK_FFMPEG_UPSTREAM=https://github.com/Bilibili/FFmpeg.git
 IJK_FFMPEG_FORK=https://github.com/Bilibili/FFmpeg.git
 IJK_FFMPEG_COMMIT=ff3.4--ijk0.8.7--20180103--001
-IJK_FFMPEG_LOCAL_REPO=extra/ffmpeg
+IJK_FFMPEG_LOCAL_REPO=extraRtmp/ffmpeg
 
 IJK_GASP_UPSTREAM=https://github.com/Bilibili/gas-preprocessor.git
 
@@ -52,7 +52,7 @@ function echo_ffmpeg_version() {
 function pull_common() {
     git --version
     echo "== pull gas-preprocessor base =="
-    sh $TOOLS/pull-repo-base.sh $IJK_GASP_UPSTREAM extra/gas-preprocessor
+    sh $TOOLS/pull-repo-base.sh $IJK_GASP_UPSTREAM extraRtmp/gas-preprocessor
 
     echo "== pull ffmpeg base =="
     sh $TOOLS/pull-repo-base.sh $IJK_FFMPEG_UPSTREAM $IJK_FFMPEG_LOCAL_REPO
