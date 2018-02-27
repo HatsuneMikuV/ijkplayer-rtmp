@@ -17,7 +17,7 @@
 
 IJK_RTMP_UPSTREAM=https://github.com/HatsuneMikuV/librtmp.git
 IJK_RTMP_FORK=https://github.com/HatsuneMikuV/librtmp.git
-IJK_RTMP_COMMIT=RTMP
+IJK_RTMP_COMMIT=librtmp-1.0.0
 IJK_RTMP_LOCAL_REPO=extraRtmp/rtmp
 
 set -e

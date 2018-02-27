@@ -18,7 +18,7 @@
 #----------
 # modify for your build tool
 
-FF_ALL_SH="rtmp openssl ffmpeg"
+FF_ALL_SH="openssl rtmp ffmpeg"
 
 #----------
 UNI_BUILD_ROOT=`pwd`

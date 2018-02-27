@@ -87,24 +87,29 @@ FF_GASPP_EXPORT=
 
 if [ "$FF_ARCH" = "i386" ]; then
     FF_BUILD_NAME="rtmp-i386"
+    FF_BUILD_NAME_OPENSSL=openssl-i386
     FF_XCRUN_PLATFORM="iPhoneSimulator"
     FF_XCRUN_OSVERSION="-mios-simulator-version-min=6.0"
 elif [ "$FF_ARCH" = "x86_64" ]; then
     FF_BUILD_NAME="rtmp-x86_64"
+    FF_BUILD_NAME_OPENSSL=openssl-x86_64
     FF_XCRUN_PLATFORM="iPhoneSimulator"
     FF_XCRUN_OSVERSION="-mios-simulator-version-min=7.0"
 elif [ "$FF_ARCH" = "armv7" ]; then
     FF_BUILD_NAME="rtmp-armv7"
+    FF_BUILD_NAME_OPENSSL=openssl-armv7
     FF_XCRUN_OSVERSION="-miphoneos-version-min=6.0"
     RTMP_CFG_FLAGS="--disable-neon $RTMP_CFG_FLAGS_ARM $RTMP_CFG_FLAGS"
 #    OPENSSL_CFG_CPU="--cpu=cortex-a8"
 elif [ "$FF_ARCH" = "armv7s" ]; then
     FF_BUILD_NAME="rtmp-armv7s"
+    FF_BUILD_NAME_OPENSSL=openssl-armv7s
     RTMP_CFG_CPU="--cpu=swift"
     FF_XCRUN_OSVERSION="-miphoneos-version-min=6.0"
     RTMP_CFG_FLAGS="--disable-neon $RTMP_CFG_FLAGS_ARM $RTMP_CFG_FLAGS"
 elif [ "$FF_ARCH" = "arm64" ]; then
     FF_BUILD_NAME="rtmp-arm64"
+    FF_BUILD_NAME_OPENSSL=openssl-arm64
     FF_XCRUN_OSVERSION="-miphoneos-version-min=7.0"
     RTMP_CFG_FLAGS="--disable-neon $RTMP_CFG_FLAGS_ARM $RTMP_CFG_FLAGS"
     FF_GASPP_EXPORT="GASPP_FIX_XCODE5=1"
@@ -145,6 +150,18 @@ echo "CROSS_TOP: $CROSS_TOP"
 echo "CROSS_SDK: $CROSS_SDK"
 echo "BUILD_TOOL: $BUILD_TOOL"
 echo "CC: $CC"
+
+#--------------------
+echo "\n--------------------"
+echo "[*] check OpenSSL"
+echo "----------------------"
+FFMPEG_DEP_OPENSSL=$FF_BUILD_ROOT/build/$FF_BUILD_NAME_OPENSSL/output/include
+FFMPEG_DEP_OPENSSL_LIB=$FF_BUILD_ROOT/build/$FF_BUILD_NAME_OPENSSL/output/lib
+#--------------------
+# with openssl
+if [ -f "${FFMPEG_DEP_OPENSSL_LIB}/libssl.a" ]; then
+    RTMP_CFG_FLAGS="$FFMPEG_CFLAGS -I${FFMPEG_DEP_OPENSSL}"
+fi
 
 #--------------------
 echo "\n--------------------"
